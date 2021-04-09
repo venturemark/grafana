@@ -14,7 +14,7 @@ spec:
     # here we define the specific subdomain of our micro service according to
     # the cluster name and DNS zone.
     #
-    #     prometheus.kia02.aws.example.com
+    #     grafana.kia02.aws.example.com
     #
     - "{{ .Release.Name }}.{{ .Values.cluster.name }}.{{ .Values.cluster.zone }}"
     {{- else }}
@@ -41,4 +41,4 @@ spec:
         - destination:
             host: "{{ .Release.Name }}"
             port:
-              number: {{ .Values.prometheus.port }}
+              number: {{ .Values.grafana.port }}
