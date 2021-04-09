@@ -1,2 +1,3 @@
 # grafana
-Grafana deployment for Kubernetes. 
+
+Grafana deployment for Kubernetes.
