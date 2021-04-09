@@ -1,0 +1,44 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "{{ .Release.Name }}"
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "{{ .Release.Name }}"
+  template:
+    metadata:
+      name: "{{ .Release.Name }}"
+      labels:
+        app.kubernetes.io/name: "{{ .Release.Name }}"
+    spec:
+      containers:
+        - name: "{{ .Release.Name }}"
+          image: "grafana/grafana:7.5.3"
+          ports:
+            - name: "http"
+              containerPort: {{ .Values.grafana.port }}
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+            requests:
+              memory: "500M"
+              cpu: "500m"
+          volumeMounts:
+            - mountPath: "/var/lib/grafana"
+              name: "storage"
+            - mountPath: "/etc/grafana/provisioning/datasources"
+              name: "datasources"
+              readOnly: false
+      volumes:
+        - name: "storage"
+          emptyDir: {}
+        - name: "datasources"
+          configMap:
+            defaultMode: 420
+            name: "{{ .Release.Name }}"

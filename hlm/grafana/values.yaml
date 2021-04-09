@@ -1,0 +1,5 @@
+cluster:
+  name: ""
+  zone: ""
+grafana:
+  port: 3030
