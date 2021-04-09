@@ -22,6 +22,9 @@ spec:
           ports:
             - name: "http"
               containerPort: {{ .Values.grafana.port }}
+          env:
+            - name: "GF_SERVER_HTTP_PORT"
+              value: "{{ .Values.grafana.port }}"
           resources:
             limits:
               memory: "1Gi"
