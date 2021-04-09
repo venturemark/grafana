@@ -2,4 +2,4 @@ cluster:
   name: ""
   zone: ""
 grafana:
-  port: 3000
+  port: 3030
